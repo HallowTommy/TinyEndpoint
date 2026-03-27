@@ -1,34 +1,16 @@
 """
 config.py
 
-Файл конфигурации для управления поведением WebView.
-
-Здесь находятся все настраиваемые параметры.
-Можно менять значения, не трогая основную логику приложения.
+Минимальная конфигурация для управления WebView.
+Меняешь только эти значения — логика приложения не трогается.
 """
 
 # Главный переключатель WebView
 # Возможные значения:
-# - "on"  → WebView включен
-# - "off" → WebView выключен
-webview_power_state = "off"
-
+# - "on"  -> WebView включен
+# - "off" -> WebView выключен
+webview_power_state = "on"
 
 # URL, который должен открываться в WebView,
-# если WebView разрешен
+# если WebView включен
 upstream_webview_url = "https://your-domain.com/"
-
-
-# Текст статуса, который возвращается приложению,
-# когда WebView включен
-enabled_status_message = "webview_enabled"
-
-
-# Текст статуса, который возвращается приложению,
-# когда WebView выключен
-disabled_status_message = "webview_disabled"
-
-
-# Таймаут (в секундах) для будущих HTTP-запросов
-# (пока не используется)
-request_timeout_seconds = 5
