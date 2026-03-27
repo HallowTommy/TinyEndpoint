@@ -70,30 +70,6 @@
 
 ---
 
-### `GET /api/webview-status`
-
-Возвращает текущее состояние WebView.
-
-**Если WebView выключен (`webview_power_state = "off"`):**
-
-```json
-{
-  "enabled": false,
-  "status": "webview_disabled"
-}
-```
-
-**Если WebView включен (`webview_power_state = "on"`):**
-
-```json
-{
-  "enabled": true,
-  "status": "webview_enabled"
-}
-```
-
----
-
 ### `GET /api/webview-target`
 
 Возвращает URL для открытия WebView.
