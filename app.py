@@ -1,111 +1,160 @@
-from fastapi import FastAPI, Request
+"""
+app.py
+
+FastAPI application that provides a very small JSON API
+for controlling WebView behavior inside a mobile application.
+
+This version keeps the logic intentionally simple:
+
+1. /api/webview-status
+   Returns whether WebView should be enabled or disabled.
+
+2. /api/webview-target
+   Returns the target URL only when WebView is enabled.
+
+This keeps the application-side logic easy:
+- first ask for status
+- if enabled, ask for target
+- if disabled, do nothing
+"""
+
+from fastapi import FastAPI
 from fastapi.responses import JSONResponse
-import httpx
 
-from config import UPSTREAM_URL, REQUEST_TIMEOUT, ALLOWED_BUNDLES, MIN_APP_VERSION
+from config import (
+    webview_power_state,
+    upstream_webview_url,
+    enabled_status_message,
+    disabled_status_message,
+)
 
-app = FastAPI()
-
-
-def compare_versions(a: str, b: str) -> int:
-    pa = [int(x) for x in a.split(".")]
-    pb = [int(x) for x in b.split(".")]
-    length = max(len(pa), len(pb))
-
-    for i in range(length):
-        va = pa[i] if i < len(pa) else 0
-        vb = pb[i] if i < len(pb) else 0
-        if va > vb:
-            return 1
-        if va < vb:
-            return -1
-    return 0
+# Create the FastAPI application instance.
+application = FastAPI(
+    title="WebView Control API",
+    description="Simple JSON API for enabling or disabling WebView and returning the target URL.",
+    version="1.0.0",
+)
 
 
-@app.get("/")
-async def root():
-    return {"ok": True, "service": "webview-config"}
+def is_webview_enabled() -> bool:
+    """
+    Returns True when the WebView flow is enabled in config.py.
+
+    This function reads the power switch from configuration and converts it
+    into a boolean value that the rest of the application can use.
+
+    Accepted enabled value:
+    - "on"
+
+    Any other value is treated as disabled.
+    """
+    normalized_power_state = webview_power_state.strip().lower()
+    return normalized_power_state == "on"
 
 
-@app.get("/api/webview-config")
-async def webview_config(request: Request):
-    bundle_id = request.headers.get("x-app-bundle-id", "")
-    app_version = request.headers.get("x-app-version", "")
-    user_agent = request.headers.get("user-agent", "AppWebViewCheck/1.0")
+def build_disabled_response() -> JSONResponse:
+    """
+    Builds the JSON response used when WebView is disabled.
 
-    if ALLOWED_BUNDLES and bundle_id not in ALLOWED_BUNDLES:
-        return JSONResponse({
+    Response example:
+    {
+        "enabled": false,
+        "status": "webview_disabled"
+    }
+    """
+    return JSONResponse(
+        content={
             "enabled": False,
-            "reason": "bundle_not_allowed"
-        })
+            "status": disabled_status_message,
+        }
+    )
 
-    if MIN_APP_VERSION and app_version:
-        if compare_versions(app_version, MIN_APP_VERSION) < 0:
-            return JSONResponse({
-                "enabled": False,
-                "reason": "version_not_allowed"
-            })
 
-    try:
-        async with httpx.AsyncClient(
-            timeout=REQUEST_TIMEOUT,
-            follow_redirects=False
-        ) as client:
-            resp = await client.get(
-                UPSTREAM_URL,
-                headers={
-                    "User-Agent": user_agent,
-                    "Accept": "*/*",
-                },
-            )
+def build_enabled_status_response() -> JSONResponse:
+    """
+    Builds the JSON response used when WebView is enabled.
 
-        # 1) Если upstream ответил редиректом — считаем это "включено"
-        if resp.status_code in (301, 302, 303, 307, 308):
-            location = resp.headers.get("location", "").strip()
+    Response example:
+    {
+        "enabled": true,
+        "status": "webview_enabled"
+    }
+    """
+    return JSONResponse(
+        content={
+            "enabled": True,
+            "status": enabled_status_message,
+        }
+    )
 
-            if location.startswith("http://") or location.startswith("https://"):
-                return JSONResponse({
-                    "enabled": True,
-                    "url": UPSTREAM_URL,
-                    "reason": "redirect_detected",
-                    "target": location,
-                    "status_code": resp.status_code
-                })
 
-            return JSONResponse({
-                "enabled": False,
-                "reason": "invalid_redirect_location",
-                "status_code": resp.status_code
-            })
+def build_enabled_target_response() -> JSONResponse:
+    """
+    Builds the JSON response containing the WebView target URL.
 
-        # 2) Если пришёл HTML/обычный 200 — считаем "не открывать"
-        content_type = resp.headers.get("content-type", "").lower()
+    This response is only returned when WebView is enabled.
 
-        if resp.status_code == 200:
-            return JSONResponse({
-                "enabled": False,
-                "reason": "html_response",
-                "status_code": resp.status_code,
-                "content_type": content_type
-            })
+    Response example:
+    {
+        "enabled": true,
+        "status": "webview_enabled",
+        "target_url": "https://your-domain.com/index.php"
+    }
+    """
+    return JSONResponse(
+        content={
+            "enabled": True,
+            "status": enabled_status_message,
+            "target_url": upstream_webview_url,
+        }
+    )
 
-        # 3) Любой другой код — тоже не открывать
-        return JSONResponse({
-            "enabled": False,
-            "reason": "unexpected_status",
-            "status_code": resp.status_code,
-            "content_type": content_type
-        })
 
-    except httpx.TimeoutException:
-        return JSONResponse({
-            "enabled": False,
-            "reason": "timeout"
-        })
+@application.get("/")
+def root_healthcheck() -> JSONResponse:
+    """
+    Root endpoint for quick health checks in browser or Postman.
 
-    except Exception as e:
-        return JSONResponse({
-            "enabled": False,
-            "reason": "request_failed",
-            "error": str(e)
-        })
+    This is useful to confirm that the FastAPI service is alive.
+    """
+    return JSONResponse(
+        content={
+            "service": "webview-control-api",
+            "alive": True,
+        }
+    )
+
+
+@application.get("/api/webview-status")
+def get_webview_status() -> JSONResponse:
+    """
+    Returns the current WebView power state.
+
+    Use this endpoint first from the mobile application.
+
+    Application logic:
+    - if enabled == false -> do not open WebView
+    - if enabled == true  -> continue to the next step
+    """
+    if not is_webview_enabled():
+        return build_disabled_response()
+
+    return build_enabled_status_response()
+
+
+@application.get("/api/webview-target")
+def get_webview_target() -> JSONResponse:
+    """
+    Returns the target URL for WebView only when WebView is enabled.
+
+    Use this endpoint only after /api/webview-status confirms that
+    the WebView flow is enabled.
+
+    Application logic:
+    - if enabled == false -> stop the flow
+    - if enabled == true  -> open WebView with target_url
+    """
+    if not is_webview_enabled():
+        return build_disabled_response()
+
+    return build_enabled_target_response()
