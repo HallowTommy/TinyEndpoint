@@ -28,12 +28,18 @@ from config import (
     disabled_status_message,
 )
 
-# Create the FastAPI application instance.
-app = FastAPI(
-    title="WebView Control API",
-    description="Simple JSON API for enabling or disabling WebView and returning the target URL.",
-    version="1.0.0",
-)
+app = FastAPI()
+
+@app.get("/")
+def root():
+    return {"service": "webview-control-api", "alive": True}
+
+@app.get("/api/webview-status")
+def get_webview_status():
+    return JSONResponse({
+        "enabled": False,
+        "status": "webview_disabled"
+    })
 
 
 def is_webview_enabled() -> bool:
