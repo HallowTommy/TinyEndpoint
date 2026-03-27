@@ -16,7 +16,7 @@ webview_power_state = "off"
 
 # URL, который должен открываться в WebView,
 # если WebView разрешен
-upstream_webview_url = "https://your-domain.com/index.php"
+upstream_webview_url = "https://your-domain.com/"
 
 
 # Текст статуса, который возвращается приложению,
