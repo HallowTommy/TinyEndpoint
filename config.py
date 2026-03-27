@@ -11,7 +11,7 @@ config.py
 # Возможные значения:
 # - "on"  → WebView включен
 # - "off" → WebView выключен
-webview_power_state = "off"
+webview_power_state = "on"
 
 
 # URL, который должен открываться в WebView,
