@@ -72,7 +72,7 @@
 
 ### `GET /api/webview-target`
 
-Возвращает URL для открытия WebView.
+Возвращает решение для WebView: открывать его или нет, и URL — если WebView включен.
 
 **Если WebView выключен:**
 
