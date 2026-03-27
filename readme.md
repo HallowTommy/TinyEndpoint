@@ -70,33 +70,34 @@
   "service": "webview-control-api",
   "alive": true
 }
+```
 
 ---
 
-```md
-### `GET /api/webview-target`
+### `GET /api/webview-status`
 
-Возвращает URL для открытия WebView.
+Возвращает текущее состояние WebView.
 
-**Если WebView выключен:**
+**Если WebView выключен (`webview_power_state = "off"`):**
 
 ```json
 {
   "enabled": false,
   "status": "webview_disabled"
 }
+```
 
-Если WebView включен (webview_power_state = "on"):
+**Если WebView включен (`webview_power_state = "on"`):**
 
+```json
 {
   "enabled": true,
   "status": "webview_enabled"
 }
-
+```
 
 ---
 
-```md
 ### `GET /api/webview-target`
 
 Возвращает URL для открытия WebView.
@@ -108,11 +109,16 @@
   "enabled": false,
   "status": "webview_disabled"
 }
+```
 
-Если WebView включен:
+**Если WebView включен:**
 
+```json
 {
   "enabled": true,
   "status": "webview_enabled",
   "target_url": "https://your-domain.com/index.php"
 }
+```
+
+---
