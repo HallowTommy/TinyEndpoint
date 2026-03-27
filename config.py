@@ -10,7 +10,7 @@ You can safely change these values without touching the main application logic.
 # Possible values:
 # - "on"  -> the API allows the application to continue the WebView flow
 # - "off" -> the API disables the WebView flow
-webview_power_state = "off"
+webview_power_state = "on"
 
 # The URL that should be opened when WebView is allowed.
 # This should be your own upstream URL.
