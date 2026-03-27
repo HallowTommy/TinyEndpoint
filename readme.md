@@ -116,7 +116,7 @@
 {
   "enabled": true,
   "status": "webview_enabled",
-  "target_url": "https://your-domain.com/index.php"
+  "target_url": "https://your-domain.com/"
 }
 ```
 
