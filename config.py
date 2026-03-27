@@ -1,28 +1,34 @@
 """
 config.py
 
-This file contains all editable configuration values for the WebView control API.
+Файл конфигурации для управления поведением WebView.
 
-You can safely change these values without touching the main application logic.
+Здесь находятся все настраиваемые параметры.
+Можно менять значения, не трогая основную логику приложения.
 """
 
-# Master switch for the whole WebView flow.
-# Possible values:
-# - "on"  -> the API allows the application to continue the WebView flow
-# - "off" -> the API disables the WebView flow
+# Главный переключатель WebView
+# Возможные значения:
+# - "on"  → WebView включен
+# - "off" → WebView выключен
 webview_power_state = "on"
 
-# The URL that should be opened when WebView is allowed.
-# This should be your own upstream URL.
-# Example:
-# "https://your-domain.com/index.php"
+
+# URL, который должен открываться в WebView,
+# если WebView разрешен
 upstream_webview_url = "https://your-domain.com/index.php"
 
-# The public status text returned to the application when WebView is enabled.
+
+# Текст статуса, который возвращается приложению,
+# когда WebView включен
 enabled_status_message = "webview_enabled"
 
-# The public status text returned to the application when WebView is disabled.
+
+# Текст статуса, который возвращается приложению,
+# когда WebView выключен
 disabled_status_message = "webview_disabled"
 
-# Request timeout (in seconds) for any future upstream checks if you add them later.
+
+# Таймаут (в секундах) для будущих HTTP-запросов
+# (пока не используется)
 request_timeout_seconds = 5
