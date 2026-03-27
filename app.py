@@ -29,7 +29,7 @@ from config import (
 )
 
 # Create the FastAPI application instance.
-application = FastAPI(
+app = FastAPI(
     title="WebView Control API",
     description="Simple JSON API for enabling or disabling WebView and returning the target URL.",
     version="1.0.0",
