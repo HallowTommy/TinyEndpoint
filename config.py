@@ -2,7 +2,7 @@
 webview_power_state = "on"       # "on" / "off" — перед ревью Apple ставь "off"
 
 # Оффер
-offer_url = "https://gexuilan.com/nWzZwGwP"
+offer_url = "https://www.google.com/"
 
 # HideClick API
 hideclick_api_key = "v1cdfa4fa1fb8b4fa0a1542ad14b5164d9"
