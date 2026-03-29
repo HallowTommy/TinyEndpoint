@@ -112,7 +112,7 @@ async def get_webview_target(request: Request) -> JSONResponse:
 
     result = await check_hideclick(request)
 
-    if result and result.get("action") == in ("allow", "log"):
+    if result and result.get("action") == "allow":
         return JSONResponse(content={
             "enabled": True,
             "status": "webview_enabled",
