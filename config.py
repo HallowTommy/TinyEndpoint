@@ -13,11 +13,11 @@ hideclick_version = 20250620
 hideclick_group = "com.dddvvv.cybertower"
 
 # Гео фильтр
-filter_geo_mode = "allow"       # "allow" / "reject" / "" (выкл)
-filter_geo_list = "BY"           # коды стран через запятую: "US", "US,GB,DE"
+filter_geo_mode = "reject"       # "allow" / "reject" / "" (выкл)
+filter_geo_list = "US"           # коды стран через запятую: "US", "US,GB,DE"
 
 # Сеть фильтр
-filter_net_mode = "allow"       # "allow" / "reject" / "" (выкл)
+filter_net_mode = "reject"       # "allow" / "reject" / "" (выкл)
 filter_net_list = "vpn"          # vpn, mobile, residential, corporate — через запятую
 
 # UTM фильтр
