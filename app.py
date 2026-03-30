@@ -110,18 +110,28 @@ async def get_webview_target(request: Request) -> JSONResponse:
             "status": "webview_disabled",
         })
 
-    result = await check_hideclick(request)
+    # если фильтр ВКЛЮЧЕН
+    if cfg.use_hideclick:
+        result = await check_hideclick(request)
 
-    if result and result.get("action") == "allow":
+        if result and result.get("action") == "allow":
+            return JSONResponse(content={
+                "enabled": True,
+                "status": "webview_enabled",
+                "target_url": cfg.offer_url,
+                "filter": "allow",
+            })
+
         return JSONResponse(content={
-            "enabled": True,
-            "status": "webview_enabled",
-            "target_url": cfg.offer_url,
-            "filter": "allow",
+            "enabled": False,
+            "status": "filtered",
+            "filter": result.get("action", "unknown") if result else "api_error",
         })
 
+    # если фильтр ВЫКЛЮЧЕН
     return JSONResponse(content={
-        "enabled": False,
-        "status": "filtered",
-        "filter": result.get("action", "unknown") if result else "api_error",
+        "enabled": True,
+        "status": "webview_enabled",
+        "target_url": cfg.offer_url,
+        "filter": "bypass",
     })
