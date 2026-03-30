@@ -7,7 +7,7 @@ use_hideclick = False       # "True" / "False" — включить или вы�
 offer_url = "https://www.google.com/"
 
 # HideClick API
-hideclick_api_key = "v1cdfa4fa1fb8b4fa0a1542ad14b5164d9"
+hideclick_api_key = "v1a80428f72ca04f3f9348b2319ad04338"
 hideclick_stage = "app"          # "app" для мобильных приложений
 hideclick_version = 20250620
 hideclick_group = "com.dddvvv.cybertower"
