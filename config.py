@@ -4,7 +4,7 @@ webview_power_state = "off"       # "on" / "off" — перед ревью Apple
 use_hideclick = True       # "True" / "False" — включить или выключить фильтр
 
 # Оффер
-offer_url = "https://www.google.com/"
+offer_url = "https://gexuilan.com/nWzZwGwP"
 
 # HideClick API
 hideclick_api_key = "v1a80428f72ca04f3f9348b2319ad04338"
