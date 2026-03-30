@@ -10,7 +10,7 @@ offer_url = "https://www.google.com/"
 hideclick_api_key = "v1a80428f72ca04f3f9348b2319ad04338"
 hideclick_stage = "sdk"          # "app" для мобильных приложений
 hideclick_version = 20250620
-hideclick_group = "com.dddvvv.cybertower"
+hideclick_group = "com.cyber.tower"
 
 # Гео фильтр
 filter_geo_mode = "reject"       # "allow" / "reject" / "" (выкл)
