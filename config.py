@@ -8,7 +8,7 @@ offer_url = "https://www.google.com/"
 
 # HideClick API
 hideclick_api_key = "v1a80428f72ca04f3f9348b2319ad04338"
-hideclick_stage = "app"          # "app" для мобильных приложений
+hideclick_stage = "sdk"          # "app" для мобильных приложений
 hideclick_version = 20250620
 hideclick_group = "com.dddvvv.cybertower"
 
