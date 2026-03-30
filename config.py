@@ -50,4 +50,4 @@ skip_cache = False
 ml_set = ""                      # кастомные AI модели HideClick PRO
 
 # Debug
-debug_mode = "on"               # "on" / "off"
+debug_mode = "off"               # "on" / "off"
