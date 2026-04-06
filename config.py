@@ -1,10 +1,19 @@
 # Главный тумблер
 webview_power_state = "off"       # "on" / "off" — перед ревью Apple ставь "off"
 
+# Фильтр тумблер
+
 use_hideclick = True       # "True" / "False" — включить или выключить фильтр
+
+# Политика безопасности тумблер
+
+use_policy = True        # "True" / "False" — включить или выключить фильтр
 
 # Оффер
 offer_url = "https://gexuilan.com/nWzZwGwP"
+
+# Политика безопасности
+policy_url = "https://savealon.quest/"
 
 # HideClick API
 hideclick_api_key = "v1a80428f72ca04f3f9348b2319ad04338"
