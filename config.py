@@ -7,9 +7,6 @@ use_hideclick = True       # "True" / "False" — включить или вык
 # Оффер
 offer_url = "https://gexuilan.com/nWzZwGwP"
 
-# Политика безопасности
-policy_url = "https://savealon.quest/"
-
 # HideClick API
 hideclick_api_key = "v1a80428f72ca04f3f9348b2319ad04338"
 hideclick_stage = "sdk"          # "app" для мобильных приложений
