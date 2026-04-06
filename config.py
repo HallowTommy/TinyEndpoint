@@ -2,7 +2,6 @@
 webview_power_state = "off"       # "on" / "off" — перед ревью Apple ставь "off"
 
 # Фильтр тумблер
-
 use_hideclick = True       # "True" / "False" — включить или выключить фильтр
 
 # Оффер
