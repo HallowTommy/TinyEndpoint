@@ -12,13 +12,10 @@
 
 ## Что делает сервис
 
-По ссылке открывает сайт:
-
-- `tiny-endpoint.vercel.app/policy` — маршрут к сайту
-
-Сервис поднимает 2 endpoint'а:
+Сервис поднимает 3 endpoint'а:
 
 - `GET /` — healthcheck
+- `GET /policy` — открывает контент
 - `GET /api/webview-target` — основной endpoint для WebView-контейнера
 
 Логика работы такая:
