@@ -140,3 +140,13 @@ async def get_webview_target(request: Request) -> JSONResponse:
         "target_url": cfg.offer_url,
         "filter": "bypass",
     })
+
+
+# Статика для css/js/images из папки PrivacyPolicy
+app.mount("/policy-static", StaticFiles(directory=POLICY_DIR), name="policy-static")
+
+
+@app.get("/policy")
+def policy_page():
+    return FileResponse(POLICY_DIR / "index.html")
+
