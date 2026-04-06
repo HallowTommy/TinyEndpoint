@@ -12,6 +12,10 @@
 
 ## Что делает сервис
 
+По ссылке открывает сайт:
+
+- `tiny-endpoint.vercel.app/policy` — маршрут к сайту
+
 Сервис поднимает 2 endpoint'а:
 
 - `GET /` — healthcheck
