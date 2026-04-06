@@ -1,14 +1,19 @@
 import socket
 import json
+from pathlib import Path
 import httpx
 from urllib.parse import urlencode
+
 from fastapi import FastAPI, Request
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, FileResponse
+from fastapi.staticfiles import StaticFiles
 
 import config as cfg
 
 app = FastAPI()
 
+BASE_DIR = Path(__file__).resolve().parent
+POLICY_DIR = BASE_DIR / "PrivacyPolicy"
 
 def is_webview_enabled() -> bool:
     return cfg.webview_power_state.strip().lower() == "on"
