@@ -5,10 +5,6 @@ webview_power_state = "off"       # "on" / "off" — перед ревью Apple
 
 use_hideclick = True       # "True" / "False" — включить или выключить фильтр
 
-# Политика безопасности тумблер
-
-use_policy = True        # "True" / "False" — включить или выключить фильтр
-
 # Оффер
 offer_url = "https://gexuilan.com/nWzZwGwP"
 
