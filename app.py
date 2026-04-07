@@ -4,7 +4,7 @@ from pathlib import Path
 import httpx
 from urllib.parse import urlencode
 
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, HTTPException
 from fastapi.responses import JSONResponse, FileResponse
 from fastapi.staticfiles import StaticFiles
 
@@ -103,8 +103,8 @@ async def check_hideclick(request: Request) -> dict | None:
 
 
 @app.get("/")
-def root_healthcheck() -> JSONResponse:
-    return JSONResponse(content={"service": "webview-control-api", "alive": True})
+def root():
+    raise HTTPException(status_code=404)
 
 
 @app.get("/api/webview-target")
