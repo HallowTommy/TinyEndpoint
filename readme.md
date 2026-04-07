@@ -14,7 +14,7 @@
 
 Сервис поднимает 3 endpoint'а:
 
-- `GET /` — healthcheck
+- `GET /` — 404
 - `GET /policy` — открывает контент
 - `GET /api/webview-target` — основной endpoint для WebView-контейнера
 
