@@ -102,11 +102,6 @@ async def check_hideclick(request: Request) -> dict | None:
         return None
 
 
-@app.get("/")
-def root():
-    raise HTTPException(status_code=404)
-
-
 @app.get("/api/webview-target")
 async def get_webview_target(request: Request) -> JSONResponse:
     if not is_webview_enabled():
