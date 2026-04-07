@@ -104,20 +104,10 @@ async def check_hideclick(request: Request) -> dict | None:
 
 @app.get("/")
 def root():
-    html = """
-    <!doctype html>
-    <html>
-    <head>
-        <meta charset="utf-8">
-        <title>404 Not Found</title>
-    </head>
-    <body>
-        <h1>Not Found</h1>
-        <p>The requested URL / was not found on this server.</p>
-    </body>
-    </html>
-    """
-    return HTMLResponse(content=html, status_code=404)
+    return HTMLResponse(
+        content="<html><head><title>404 Not Found</title></head><body><h1>404 Not Found</h1></body></html>",
+        status_code=404
+    )
 
 
 @app.get("/api/webview-target")
