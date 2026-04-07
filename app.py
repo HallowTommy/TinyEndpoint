@@ -5,7 +5,7 @@ import httpx
 from urllib.parse import urlencode
 
 from fastapi import FastAPI, Request, HTTPException
-from fastapi.responses import JSONResponse, FileResponse, PlainTextResponse
+from fastapi.responses import JSONResponse, FileResponse, PlainTextResponse, HTMLResponse
 from fastapi.staticfiles import StaticFiles
 
 import config as cfg
@@ -104,7 +104,7 @@ async def check_hideclick(request: Request) -> dict | None:
 
 @app.get("/")
 def root():
-    return PlainTextResponse("404 Not Found", status_code=404)
+    return HTMLResponse("<h1>404</h1>", status_code=404)
 
 
 @app.get("/api/webview-target")
